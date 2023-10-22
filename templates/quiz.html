@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if techniques %}
+    <style>
+        img {
+            height: 300px;
+            width: 300px;
+        }
+    </style>
+    <script>
+        let currentTechnique = 0;
+        let techniques = {{ techniques|tojson }};
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('guessForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                checkAnswer();
+            });
+        });
+
+        function checkAnswer() {
+            let userAnswer = document.getElementById('answer').value;
+            if (userAnswer.toLowerCase() === techniques[currentTechnique].name.toLowerCase()) {
+                alert("Correct!");
+                currentTechnique++;
+                if (currentTechnique < techniques.length) {
+                    document.getElementById('techniqueImage').src = techniques[currentTechnique].image_path;
+                } else {
+                    window.location = "/congratulations";
+                }
+            } else {
+                alert("Incorrect!");
+            }
+        }
+    </script>
+    <div class="text-center mb-4 mx-auto">
+        <h2 class="text-center mb-4">Guess the Technique</h2>
+        <img id="techniqueImage" src="{{ techniques[0].image_path }}" alt="Judo Technique" class="img-fluid">
+    </div>
+    <form id="guessForm" class="mx-auto" style="max-width: 300px;">
+        <input type="text" id="answer" class="form-control mb-3" placeholder="Enter technique name">
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+{% else %}
+    <p>No techniques available for the selected belts.</p>
+{% endif %}
+{% endblock %}

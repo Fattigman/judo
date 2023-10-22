@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <!-- Bootstrap and Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Custom styles for sidebar -->
+    <style>
+        .sidebar {
+            height: 100%;
+            width: 60px; /* Adjusted width for icons */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        body {
+            margin-left: 70px; /* Adjusted for the icon-only sidebar */
+        }
+
+    </style>
+    
+</head>
+<body>
+    <!-- Sidebar content -->
+    <div class="sidebar" id="mySidebar">
+        <a href="/" title="Home">
+            <i class="fa fa-home"></i>
+        </a>
+        <a href="https://github.com/Fattigman" title="GitHub">
+            <i class="fa fa-github" aria-hidden="true"></i>
+        </a>
+    </div>    
+
+    <!-- Main content placeholder -->
+    {% block content %}{% endblock %}
+    
+    <!-- Optional scripts for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
