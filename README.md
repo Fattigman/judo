@@ -1,5 +1,3 @@
-The repository "judo" by Fattigman does not contain a `readme.md` file. However, I can provide a brief overview of the repository based on its structure and contents.
-
 ### Repository Overview
 
 - **Branch:** master
