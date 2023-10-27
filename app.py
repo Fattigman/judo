@@ -48,7 +48,7 @@ def check_answer():
     user_answer = request.form['answer']
     technique_id = request.form['technique_id']
     technique = JudoTechnique.query.get(technique_id)
-    if user_answer.lower() == technique.name.lower():
+    if user_answer.lower() == technique.name.lower() or user_answer.lower().replace(' ','-') == technique.name.lower():
         return jsonify(result="Correct!")
     else:
         return jsonify(result="Incorrect!")
@@ -58,8 +58,9 @@ def congratulations():
     return render_template('congratulations.html')
 
 @app.route('/techniques')
-def congratulations():
-    return render_template('techniques.html')
+def techniques():
+    techniques = JudoTechnique.query.all()
+    return render_template('techniques.html', techniques=techniques)
 
 if __name__ == '__main__':
     app.run(debug=True)
