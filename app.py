@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///judo.db'
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 db = SQLAlchemy(app)
 
 class JudoTechnique(db.Model):
@@ -55,6 +56,10 @@ def check_answer():
 @app.route('/congratulations')
 def congratulations():
     return render_template('congratulations.html')
+
+@app.route('/techniques')
+def congratulations():
+    return render_template('techniques.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
