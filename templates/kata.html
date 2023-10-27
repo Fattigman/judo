@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Kata
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto text-center">
+        <h1>Katas</h1>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <th>
+                    Name
+                </th>
+                <th>
+                    ID
+                </th>
+            </thead>
+            {% for kata in katas %}
+                <tr>
+                    <td>
+                        {{kata.name}}
+                    </td>
+                    <td>
+                        {{kata.id}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="/" class="btn btn-primary">Return to Home</a>
+    </div>
+{% endblock %}

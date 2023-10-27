@@ -1,4 +1,4 @@
-from app import app, db, JudoTechnique
+from app import app, db, JudoTechnique, Kata
 
 with app.app_context():
     db.drop_all()
@@ -46,8 +46,21 @@ with app.app_context():
         JudoTechnique(name="uchi-mata-gaeshi", belt="UNKNOWN", image_path="static/images/uchi_mata_gaeshi.jpeg")
     ]
 
-
+    katas = [
+        Kata(name="Nage no Kata"),
+        Kata(name="Katame no Kata"),
+        Kata(name="Kime no Kata"),
+        Kata(name="Kodokan Goshin Jutsu"),
+        Kata(name="Ju no Kata"),
+        Kata(name="Itsuku no Kata"),
+        Kata(name="Koshiki no Kata"),
+        Kata(name="Seiryoku Zen´yo Kokumin Taiiku")
+    ]
 
     for technique in techniques:
         db.session.add(technique)
+        db.session.commit()
+
+    for kata in katas:
+        db.session.add(kata)
         db.session.commit()

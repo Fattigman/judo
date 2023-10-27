@@ -21,6 +21,16 @@ class JudoTechnique(db.Model):
             'belt': self.belt
         }
 
+class Kata(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+
 
 @app.route('/', methods = ['POST', 'GET'])
 def index():
@@ -61,6 +71,18 @@ def congratulations():
 def techniques():
     techniques = JudoTechnique.query.all()
     return render_template('techniques.html', techniques=techniques)
+
+@app.route('/katas')
+def katas():
+    katas = Kata.query.all()
+    return render_template('kata.html', katas=katas)
+
+
+@app.route('/words')
+def words():
+    return render_template('words.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
