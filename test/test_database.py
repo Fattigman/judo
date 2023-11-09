@@ -4,6 +4,7 @@ from ..app import app, db, JudoTechnique, Kata
 # Import the pytest library
 import pytest
 
+
 # Define a pytest fixture to set up and tear down the database
 @pytest.fixture
 def setup_db():
@@ -18,12 +19,15 @@ def setup_db():
         # Drop all tables
         db.drop_all()
 
+
 # Define a pytest function to test the JudoTechnique model
 def test_judo_technique_model(setup_db):
     # Use the setup_db fixture
     db = setup_db
     # Create a JudoTechnique instance
-    technique = JudoTechnique(name="seoi-nage", belt="yellow", image_path="static/images/seoi_nage.jpeg")
+    technique = JudoTechnique(
+        name="seoi-nage", belt="yellow", image_path="static/images/seoi_nage.jpeg"
+    )
     # Add and commit the technique to the db
     db.session.add(technique)
     db.session.commit()
@@ -33,6 +37,7 @@ def test_judo_technique_model(setup_db):
     assert technique.name == "seoi-nage"
     assert technique.belt == "yellow"
     assert technique.image_path == "static/images/seoi_nage.jpeg"
+
 
 # Define a pytest function to test the Kata model
 def test_kata_model(setup_db):

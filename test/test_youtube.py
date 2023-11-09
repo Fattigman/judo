@@ -1,6 +1,8 @@
 # Import the requests library
 import requests
 from pprint import pprint
+
+
 # Define a function to check if a YouTube video exists
 def youtube_video_exists(video_id):
     # Set response status pattern
@@ -12,6 +14,7 @@ def youtube_video_exists(video_id):
 
     # Return True if the response status code is 200 (OK), False otherwise
     return False if response.status_code == 404 else True
+
 
 # Define a pytest function to test the youtube_video_exists function
 def test_youtube_video_exists():

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Techniques
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto text-center">
+        <h1>{{ technique.name }}</h1>
+        <img class="card-img-top" src="{{technique.image_path}}" alt="{{technique.name}}" style="height:300px; width:300px">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{technique.youtube_id}}" frameborder="0" allowfullscreen></iframe>
+
+    </div>
+{% endblock %}
