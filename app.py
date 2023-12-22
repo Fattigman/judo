@@ -3,100 +3,80 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_babel import Babel, gettext
 
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///judo.db"
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-LANGUAGES = {
-    'en': 'English',
-    'sv': 'Swedish'
-}
+db = SQLAlchemy(app)
 
-def get_locale():
-    return request.accept_languages.best_match(['en', 'sv'])
-
-def create_app(ret_db = False):
-    app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///judo.db"
-    app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-    babel = Babel(default_locale='en', locale_selector_func=get_locale)
-    babel.init_app(app)
-
-    db = SQLAlchemy(app)
-
-    db.init_app()
-    
-    if ret_db:
-        return db
-    # your routes go her
-    @app.route("/", methods=["POST", "GET"])
-    def index():
-        return render_template("index.html")
+# your routes go her
+@app.route("/", methods=["POST", "GET"])
+def index():
+    return render_template("index.html")
 
 
-    @app.route("/start_quiz", methods=["POST"])
-    def start_quiz():
-        belts = request.form.getlist("belts")
-        techniques = (
-            JudoTechnique.query.filter(JudoTechnique.belt.in_(belts))
-            .order_by(func.random())
-            .all()
+@app.route("/start_quiz", methods=["POST"])
+def start_quiz():
+    belts = request.form.getlist("belts")
+    techniques = (
+        JudoTechnique.query.filter(JudoTechnique.belt.in_(belts))
+        .order_by(func.random())
+        .all()
+    )
+    print(belts, techniques)
+    if not techniques:
+        # Return some error message or redirect to the index with a message
+        return redirect(
+            url_for("index", message="No techniques found for the selected belts.")
         )
-        print(belts, techniques)
-        if not techniques:
-            # Return some error message or redirect to the index with a message
-            return redirect(
-                url_for("index", message="No techniques found for the selected belts.")
-            )
 
-        # Convert the techniques to a list of dictionaries
-        techniques_dict_list = [tech.as_dict() for tech in techniques]
+    # Convert the techniques to a list of dictionaries
+    techniques_dict_list = [tech.as_dict() for tech in techniques]
 
-        return render_template("quiz.html", techniques=techniques_dict_list)
+    return render_template("quiz.html", techniques=techniques_dict_list)
 
 
-    @app.route("/check_answer", methods=["POST"])
-    def check_answer():
-        user_answer = request.form["answer"]
-        technique_id = request.form["technique_id"]
-        technique = JudoTechnique.query.get(technique_id)
-        if (
-            user_answer.lower() == technique.name.lower()
-            or user_answer.lower().replace(" ", "-") == technique.name.lower()
-        ):
-            return jsonify(result="Correct!")
-        else:
-            return jsonify(result="Incorrect!")
+@app.route("/check_answer", methods=["POST"])
+def check_answer():
+    user_answer = request.form["answer"]
+    technique_id = request.form["technique_id"]
+    technique = JudoTechnique.query.get(technique_id)
+    if (
+        user_answer.lower() == technique.name.lower()
+        or user_answer.lower().replace(" ", "-") == technique.name.lower()
+    ):
+        return jsonify(result="Correct!")
+    else:
+        return jsonify(result="Incorrect!")
 
 
-    @app.route("/congratulations")
-    def congratulations():
-        return render_template("congratulations.html")
+@app.route("/congratulations")
+def congratulations():
+    return render_template("congratulations.html")
 
 
-    @app.route("/techniques")
-    def techniques():
-        techniques = JudoTechnique.query.all()
-        return render_template("techniques.html", techniques=techniques)
+@app.route("/techniques")
+def techniques():
+    techniques = JudoTechnique.query.all()
+    return render_template("techniques.html", techniques=techniques)
 
-    @app.route("/single_technique")
-    def single_technique():
-        technique_name : str = request.args.get('name')
-        technique : JudoTechnique = JudoTechnique.query.filter_by(name=technique_name).one()
-        return render_template("single_technique.html", technique=technique)
+@app.route("/single_technique")
+def single_technique():
+    technique_name : str = request.args.get('name')
+    technique : JudoTechnique = JudoTechnique.query.filter_by(name=technique_name).one()
+    return render_template("single_technique.html", technique=technique)
 
 
 
-    @app.route("/katas")
-    def katas():
-        katas = Kata.query.all()
-        return render_template("kata.html", katas=katas)
+@app.route("/katas")
+def katas():
+    katas = Kata.query.all()
+    return render_template("kata.html", katas=katas)
 
 
-    @app.route("/words")
-    def words():
-        return render_template("words.html")
-
-
-    return app
+@app.route("/words")
+def words():
+    return render_template("words.html")
 
 
 class JudoTechnique(db.Model):
