@@ -32,6 +32,7 @@
             document.getElementById('guessForm').addEventListener('submit', function (event) {
                 event.preventDefault();
                 checkAnswer();
+                document.getElementById('guessForm').reset();
             });
         });
 
@@ -67,7 +68,7 @@
         }
     </script>
     <div class="text-center mb-4 mx-auto blur-bottom">
-        <h2 class="text-center mb-4">Guess the Technique</h2>
+        <h2 class="text-center mb-4">Name the Technique</h2>
         <img id="techniqueImage" src="{{ techniques[0].image_path }}" alt="Judo Technique" class="img-fluid">
     </div>
     <form id="guessForm" class="mx-auto" style="max-width: 300px;">

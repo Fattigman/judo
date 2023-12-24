@@ -7,10 +7,10 @@ This web application is in early development and I list plans here. I do not pro
 
 This Flask web application serves as a comprehensive resource for Judo theory, providing users with access to educational content, tutorials, quizzes, and interactive learning materials. Whether you are a beginner looking to learn the basics or an experienced practitioner aiming to deepen your understanding, this platform is designed to support your learning journey.
 
-## Features
+## Planned Features
 
 - **Interactive Tutorials**: Step-by-step guides and tutorials to help users learn different Judo techniques and theories.
-- **Quizzes**: Test your knowledge with quizzes tailored to different skill levels.
+- **Quizzes**: :white_check_mark: Test your knowledge with quizzes tailored to different skill levels.
 - **Video Demonstrations**: Access to a library of video demonstrations showcasing various Judo techniques.
 - **Progress Tracking**: Users can track their learning progress and revisit topics as needed.
 - **Responsive Design**: Accessible on both desktop and mobile devices.
