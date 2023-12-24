@@ -21,17 +21,33 @@
 
         function checkAnswer() {
             let userAnswer = document.getElementById('answer').value;
-            if (userAnswer.toLowerCase() === techniques[currentTechnique].name.toLowerCase()) {
-                alert("Correct!");
-                currentTechnique++;
-                if (currentTechnique < techniques.length) {
-                    document.getElementById('techniqueImage').src = techniques[currentTechnique].image_path;
+            fetch('/check_answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    answer: userAnswer,
+                    technique: techniques[currentTechnique].id
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result == 'Correct!') {
+                    alert("Correct!");
+                    currentTechnique++;
+                    if (currentTechnique < techniques.length) {
+                        document.getElementById('techniqueImage').src = techniques[currentTechnique].image_path;
+                    } else {
+                        window.location = "/congratulations";
+                    }
                 } else {
-                    window.location = "/congratulations";
+                    alert("Incorrect!");
                 }
-            } else {
-                alert("Incorrect!");
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
     <div class="text-center mb-4 mx-auto">

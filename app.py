@@ -1,4 +1,12 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import (
+    Flask,
+    render_template,
+    request,
+    jsonify,
+    redirect,
+    url_for,
+    make_response,
+)
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_babel import Babel, gettext
@@ -8,6 +16,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///judo.db"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 db = SQLAlchemy(app)
+
 
 # your routes go her
 @app.route("/", methods=["POST", "GET"])
@@ -23,7 +32,6 @@ def start_quiz():
         .order_by(func.random())
         .all()
     )
-    print(belts, techniques)
     if not techniques:
         # Return some error message or redirect to the index with a message
         return redirect(
@@ -38,16 +46,30 @@ def start_quiz():
 
 @app.route("/check_answer", methods=["POST"])
 def check_answer():
-    user_answer = request.form["answer"]
-    technique_id = request.form["technique_id"]
+    data = request.get_json()
+    user_answer = data.get("answer")
+    technique_id = data.get("technique")
     technique = JudoTechnique.query.get(technique_id)
     if (
         user_answer.lower() == technique.name.lower()
-        or user_answer.lower().replace(" ", "-") == technique.name.lower()
+        or user_answer.lower() == technique.name.lower().replace("-", " ")
     ):
         return jsonify(result="Correct!")
     else:
         return jsonify(result="Incorrect!")
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    response = {"error": "Internal Server Error", "message": str(error)}
+    return make_response(jsonify(response), 500)
+
+
+@app.errorhandler(400)
+def bad_server_error(error):
+    print("Request data: ", request.data)
+    response = {"error": "Bad Request", "message": str(error)}
+    return make_response(jsonify(response), 400)
 
 
 @app.route("/congratulations")
@@ -60,12 +82,12 @@ def techniques():
     techniques = JudoTechnique.query.all()
     return render_template("techniques.html", techniques=techniques)
 
+
 @app.route("/single_technique")
 def single_technique():
-    technique_name : str = request.args.get('name')
-    technique : JudoTechnique = JudoTechnique.query.filter_by(name=technique_name).one()
+    technique_name: str = request.args.get("name")
+    technique: JudoTechnique = JudoTechnique.query.filter_by(name=technique_name).one()
     return render_template("single_technique.html", technique=technique)
-
 
 
 @app.route("/katas")
