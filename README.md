@@ -9,11 +9,11 @@ This Flask web application serves as a comprehensive resource for Judo theory, p
 
 ## Planned Features
 
-- **Interactive Tutorials**: Step-by-step guides and tutorials to help users learn different Judo techniques and theories.
+- **Interactive Tutorials**: :negative_squared_cross_mark: Step-by-step guides and tutorials to help users learn different Judo techniques and theories.
 - **Quizzes**: :white_check_mark: Test your knowledge with quizzes tailored to different skill levels.
-- **Video Demonstrations**: Access to a library of video demonstrations showcasing various Judo techniques.
-- **Progress Tracking**: Users can track their learning progress and revisit topics as needed.
-- **Responsive Design**: Accessible on both desktop and mobile devices.
+- **Video Demonstrations**: :negative_squared_cross_mark: Access to a library of video demonstrations showcasing various Judo techniques.
+- **Progress Tracking**: :negative_squared_cross_mark: Users can track their learning progress and revisit topics as needed.
+- **Responsive Design**: :negative_squared_cross_mark: Accessible on both desktop and mobile devices.
 
 ## Getting Started
 
