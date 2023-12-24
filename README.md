@@ -68,3 +68,6 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 ## Contact
 
 For any inquiries or further assistance, please contact the project maintainers at [jacob.karlstrom@gmail.com](mailto:jacob.karlstrom@gmail.com).
+
+## Acknowledgement
+Images used in this project are created by Michael Hultström under the Creative commons - attribution, share-alike - license. These images can be found here: https://www.flickr.com/photos/hultstrom/. Thus any version of these images are released under the same license.
