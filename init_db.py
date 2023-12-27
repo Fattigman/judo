@@ -16,11 +16,6 @@ with app.app_context():
             image_path="static/images/ippon-seoi-nage.png",
         ),
         JudoTechnique(
-            name="seoi-otoshi",
-            belt="green",
-            image_path="static/images/seoi-otoshi.png",
-        ),
-        JudoTechnique(
             name="tai-otoshi",
             belt="orange",
             image_path="static/images/tai-otoshi.png",
@@ -39,11 +34,6 @@ with app.app_context():
             name="sukui-nage",
             belt="brown",
             image_path="static/images/sukui-nage.png",
-        ),
-        JudoTechnique(
-            name="obi-otoshi",
-            belt="UNKNOWN",
-            image_path="static/images/obi-otoshi.png",
         ),
         JudoTechnique(
             name="uki-otoshi",
@@ -71,39 +61,9 @@ with app.app_context():
             image_path="static/images/sumi-gaeshi.png",
         ),
         JudoTechnique(
-            name="yama-arashi",
-            belt="UNKNOWN",
-            image_path="static/images/yama-arashi.png",
-        ),
-        JudoTechnique(
-            name="obi-tori-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/obi-tori-gaeshi.png",
-        ),
-        JudoTechnique(
-            name="morote-gari",
-            belt="brown",
-            image_path="static/images/morote-gari.png",
-        ),
-        JudoTechnique(
-            name="kuchiki-taoshi",
-            belt="UNKNOWN",
-            image_path="static/images/kuchiki-taoshi.png",
-        ),
-        JudoTechnique(
-            name="kibisu-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/kibisu-gaeshi.png",
-        ),
-        JudoTechnique(
-            name="uchi-mata-sukashi",
-            belt="UNKNOWN",
-            image_path="static/images/uchi-mata-sukashi.png",
-        ),
-        JudoTechnique(
-            name="ko-uchi-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/ko-uchi-gaeshi.png",
+            name="ushiro-goshi",
+            belt="blue",
+            image_path="static/images/ushiro-goshi.png",
         ),
         JudoTechnique(
             name="de-ashi-barai",
@@ -204,34 +164,14 @@ with app.app_context():
             image_path="static/images/o-soto-guruma.png",
         ),
         JudoTechnique(
-            name="o-uchi-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/o-uchi-gaeshi.png",
-        ),
-        JudoTechnique(
             name="hane-goshi",
             belt="blue",
             image_path="static/images/hane-goshi.png",
         ),
         JudoTechnique(
-            name="harai-goshi-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/harai-goshi-gaeshi.png",
-        ),
-        JudoTechnique(
             name="harai-goshi",
             belt="orange",
             image_path="static/images/harai-goshi.png",
-        ),
-        JudoTechnique(
-            name="tsurikomi-goshi-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/tsurikomi-goshi-gaeshi.png",
-        ),
-        JudoTechnique(
-            name="uchi-mata-gaeshi",
-            belt="UNKNOWN",
-            image_path="static/images/uchi-mata-gaeshi.png",
         ),
         JudoTechnique(
             name="yoko-otoshi",
@@ -256,12 +196,12 @@ with app.app_context():
         JudoTechnique(
             name="yoko-wakare",
             belt="brown",
-            image_path="static/images/yoko-wak.png",
+            image_path="static/images/yoko-wakare.png",
         ),
         JudoTechnique(
             name="hane-maki-komi",
             belt="brown",
-            image_path="static/images/hani-maki-komi.png",
+            image_path="static/images/hane-maki-komi.png",
         ),
 
     ]
