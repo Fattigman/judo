@@ -164,6 +164,11 @@ with app.app_context():
             image_path="static/images/o-soto-guruma.png",
         ),
         JudoTechnique(
+            name="kame-shiho-gatame",
+            belt="yellow",
+            image_path="static/images/kame-shiho-gatame.png",
+        ),
+        JudoTechnique(
             name="juji-gatame",
             belt="orange",
             image_path="static/images/juji-gatame.png",
