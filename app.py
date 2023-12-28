@@ -10,6 +10,7 @@ from flask import (
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from flask_babel import Babel, gettext
+from itertools import groupby
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///judo.db"
@@ -80,7 +81,10 @@ def congratulations():
 @app.route("/techniques")
 def techniques():
     techniques = JudoTechnique.query.all()
-    return render_template("techniques.html", techniques=techniques)
+    belt_order = ["yellow", "orange", "green", "blue", "brown"]
+    techniques = sorted(techniques, key=lambda technique: belt_order.index(technique.belt))
+    techniques_grouped = {k: list(v) for k, v in groupby(techniques, key=lambda x: x.belt)}
+    return render_template("techniques.html", techniques_grouped=techniques_grouped)
 
 
 @app.route("/single_technique")

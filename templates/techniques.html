@@ -7,19 +7,24 @@
 {% block content %}
     <div class="container mx-auto text-center">
         <h1>Technique list</h1>
-        <div class="card-columns">  
-            {% for technique in techniques %}
-            <div class="card">
-                <img class="card-img-top" src="{{technique.image_path}}" alt="{{technique.name}}" style="height:200px; width:200px">
-                <div class="card-body">
-                  <h4 class="card-title">{{technique.name}}</h4>
-                  <p class="card-text">Belt: {{technique.belt}}</p>
-                  <a href="https://judo.ijf.org/techniques/{{technique.name}}" target="_blank" class="btn btn-primary">See video</a>
-                  <!-- <a href="/single_technique?name={{technique.name}}" class="btn btn-primary">Learn more about this technique</a> -->
-                </div>
-              </div>
+         
+            {% for belt, techniques in techniques_grouped.items() %}
+                <h2>{{ belt.capitalize() }} Belt Techniques</h2>
+                <div class="card-columns"> 
+                {% for technique in techniques %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{technique.image_path}}" alt="{{technique.name}}" style="height:200px; width:200px">
+                        <div class="card-body">
+                        <h4 class="card-title">{{technique.name}}</h4>
+                        <p class="card-text">Belt: {{technique.belt}}</p>
+                        <a href="https://judo.ijf.org/techniques/{{technique.name}}" target="_blank" class="btn btn-primary">See video</a>
+                        <!-- <a href="/single_technique?name={{technique.name}}" class="btn btn-primary">Learn more about this technique</a> -->
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             {% endfor %}
-        </div>
+        
         <a href="/" id="home-button" class="btn btn-primary">Return to Home</a>
     </div>
     <br>
