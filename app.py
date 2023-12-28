@@ -99,6 +99,10 @@ def katas():
     katas = Kata.query.all()
     return render_template("kata.html", katas=katas)
 
+@app.route("/katas/<id>", methods = ["POST", "GET"])
+def single_kata(id:str):
+    kata = Kata.query.filter_by(id=id).one()
+    return render_template("single_kata.html", kata=kata)
 
 @app.route("/words")
 def words():
